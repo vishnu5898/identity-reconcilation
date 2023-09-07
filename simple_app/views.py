@@ -70,7 +70,8 @@ def get_related_secondary_contact_details(primary_data):
 # Create your views here.
 def get_contact_data(request):
     if request.method != "POST":
-        return JsonResponse({"message": "FAILED"})
+        return JsonResponse({"status": "FAILED",
+                             "message": "ONLY POST REQUEST IS ALLOWED"})
 
     payload = json.loads(request.body.decode("utf-8"))
     datas = Contact.objects.filter(email=payload["email"]) | Contact.objects.filter(phone_number=payload["phoneNumber"])
